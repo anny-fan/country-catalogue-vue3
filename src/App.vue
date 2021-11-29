@@ -1,17 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <CountryCatalogue msg="Welcome to Your Vue.js App" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CountryCatalogue from "./components/CountryCatalogue.vue";
+import { inject } from "vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    CountryCatalogue,
+  },
+  setup() {
+    const axios = inject("axios"); // inject axios
+    // const getList = () => {
+    axios.get("https://restcountries.com/v3.1/all").then((response) => {
+      console.log(response.data);
+    });
+    // };
+  },
+};
 </script>
 
 <style>
